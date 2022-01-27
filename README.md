@@ -5,6 +5,19 @@ In this project we implemented ToyChord, a simplified Chord[[1]](#1) version. Th
 
 Every **key** is generated based on the name of a file and it is inserted into the DHT. Our keyspace, which representsthe range of possible hashes, is between 0 and 2m-1, where m is defined by MAX_BITS in our code (we have m=10, which makes our keyspace to be 0-1023). 
 
+The commands and functions are: 
+* Join: join the network/connect to bootstrap node.
+* Insert: insert <key, value> (eg. ('ntua', 1)).
+* Delete: delete <key> from DHT network.
+* Depart: exits from network's topology.
+* Query: Query <key> (special case * prints every key,value on DHT).
+* Overlay: prints network topology.
+* Succ/pred: Prints ID,succesor,predecessor of given node.
+* read_insert: Execute insert.txt for given node.
+* read_query: Execute query.txt for given node.
+* read_requests: Execute requests.txt for given node.
+
+
 
 ## References
 
