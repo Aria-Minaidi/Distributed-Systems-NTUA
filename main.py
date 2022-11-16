@@ -101,11 +101,11 @@ class Node:
             start_time=rDataList[5]
             sDataList=rDataList
             self.transferFile(connection, address, rDataList)
-            if(rDataList[1]==1 or rDataList[1]==2): #an kanei upload h delete
+            if(rDataList[1]==1 or rDataList[1]==2): #upload or delete
                 
                 if(mpes==True):     #eimai successor
                     if(chain==False):
-                        b = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  #sundesi me bootstrap gia gemisma master dict
+                        b = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  #connect with bootstrap to fill master dict
                         b.connect(bootstrap)  
                         end=time.time()
                         xronos=end-start_time
@@ -167,7 +167,7 @@ class Node:
             for item in lista: 
                 self.filenameList.remove(item)
             #print('pare ti lista', self.filenameList)
-            b = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  #sundesi me bootstrap gia gemisma master dict
+            b = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  #connect with bootstrap to fill master dict
             b.connect(bootstrap)  
             sDataList=[9,self.id,self.filenameList]
             b.sendall(pickle.dumps(sDataList))
@@ -274,7 +274,6 @@ class Node:
                 
                 fileID=getHash(file)
                 recvIPport = self.getSuccessor(self.succ, fileID)
-                #print('SUCCESSOOOOOOOOR', self.succ)
                 self.uploadFile((file,filedict[file]), recvIPport, True)
   
 
@@ -283,7 +282,7 @@ class Node:
         choice = rDataList[1]
         filename = rDataList[2]
         #print('FILENAME',filename)
-        fileID = getHash(filename[0])      #to file einai toupla 
+        fileID = getHash(filename[0])      #file is a tuple
         # IF client wants to download file
         if choice == 0:
             print("Download request for file:", filename)
@@ -306,7 +305,7 @@ class Node:
             print("Uploading file ID:", fileID)
             self.filenameList.append(filename)
             
-            b = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  #sundesi me bootstrap gia gemisma master dict
+            b = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  #connect with bootstrap to fill master dict
             b.connect(bootstrap)  
             sDataList=[9,self.id,self.filenameList]
             b.sendall(pickle.dumps(sDataList))
@@ -329,7 +328,7 @@ class Node:
                     self.filenameList=list(dictionary.items()) 
                     #print("listara", self.filenameList)
                     #connection.sendall(pickle.dumps('OK'))
-                    b = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  #sundesi me bootstrap gia gemisma master dict
+                    b = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  #connect with bootstrap to fill master dict
                     b.connect(bootstrap)  
                     sDataList=[9,self.id,self.filenameList]
                     b.sendall(pickle.dumps(sDataList))   
