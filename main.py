@@ -9,7 +9,6 @@ import socket, random
 import threading
 import pickle
 import sys
-import time
 import hashlib
 import os
 from collections import OrderedDict
